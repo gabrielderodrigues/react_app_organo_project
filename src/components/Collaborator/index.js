@@ -1,17 +1,19 @@
+import { AiFillCloseCircle } from 'react-icons/ai';
 import './Collaborator.css';
 
-const Collaborator = ({ name, image, role, specialty, backgroundColorStyle }) => {
-  const imageInfo = `Imagem do ${name}.`;
+const Collaborator = ({ collaborator, whenDelete, backgroundColorStyle, fontColorStyle }) => {
+  const imageInfo = `Imagem do ${collaborator.name}.`;
 
   return (
     <div className='collaborator'>
-      <div className='cabecalho' style={{ backgroundColor: backgroundColorStyle }}>
-        <img src={image} alt={imageInfo} />
+      <AiFillCloseCircle size={29} className="delete" onClick={whenDelete} />
+      <div className='header' style={{ backgroundColor: backgroundColorStyle }}>
+        <img src={collaborator.image} alt={imageInfo} />
       </div>
-      <div className='rodape'>
-        <h4>{name}</h4>
-        <h5>{role}</h5>
-        <h5 style={{color: backgroundColorStyle}}>{specialty}</h5>
+      <div className='card-footer'>
+        <h4>{collaborator.name}</h4>
+        <p>{collaborator.role}</p>
+        <h5 style={{color: fontColorStyle}}>{collaborator.specialty}</h5>
       </div>
     </div>
   );

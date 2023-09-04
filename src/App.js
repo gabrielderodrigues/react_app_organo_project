@@ -5,43 +5,37 @@ import Team from './components/Team';
 import Footer from './components/Footer';
 
 function App() {
-  const teams = [
+  
+  const [teams, setTeams] = useState([
     {
       name: 'Programação',
-      primaryColor: '#57C278',
-      secondaryColor: '#D9F7E9'
+      color: '#57C278'
     },
     {
       name: 'Front-End',
-      primaryColor: '#82CFFA',
-      secondaryColor: '#E8F8FF'
+      color: '#82CFFA'
     },
     {
       name: 'Data Science',
-      primaryColor: '#A6D157',
-      secondaryColor: '#F0F8E2'
+      color: '#A6D157'
     },
     {
       name: 'DevOps',
-      primaryColor: '#E06869',
-      secondaryColor: '#FDE7E8'
+      color: '#E06B69'
     },
     {
       name: 'UX & Design',
-      primaryColor: '#DB6EBF',
-      secondaryColor: '#FAE9F5'
+      color: '#DB6EBF'
     },
     {
       name: 'Mobile',
-      primaryColor: '#FFBA05',
-      secondaryColor: '#FFF5D9'
+      color: '#FFBA05'
     },
     {
       name: 'Inovação e Gestão',
-      primaryColor: '#FF8A29',
-      secondaryColor: '#FFEEDF'
+      color: '#FF8A29'
     },
-  ];
+  ]);
 
   const [collaborators, setCollaborators] = useState([]);
 
@@ -49,18 +43,34 @@ function App() {
     setCollaborators([...collaborators, collaborator]);
   };
 
+  function deleteCollaborator() {
+    console.log('teste');
+  }
+
+  function changeTeamColor(color, name) {
+    setTeams(teams.map(team => {
+      if (teams.name === name) {
+        team.color = color;
+      }
+      return team;
+    }));
+  }
+
   return (
     <div className="App">
       <Banner />
       <Forms teams={teams.map(team => team.name)}
         whenRegistered={collaborator => whenRegisteredNewCollaborator(collaborator)}/>
-
-      {teams.map(team => <Team 
-        key={team.name} 
-        name={team.name} 
-        primaryColor={team.primaryColor} 
-        secondaryColor={team.secondaryColor} 
-        collaborators={collaborators.filter(collaborator => collaborator.team == team.name)} />)}
+      <section className="teams">
+        <h1>Minha organização</h1>
+        {teams.map((team, index) => <Team 
+          key={index}
+          team={team}
+          collaborators={collaborators.filter(collaborator => collaborator.team === team.name)}
+          changeColor={changeTeamColor}
+          whenDelete={deleteCollaborator()} 
+        />)}
+      </section>
       <Footer />
     </div>
   );
