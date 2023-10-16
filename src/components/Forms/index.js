@@ -4,16 +4,18 @@ import TextField from '../TextField';
 import DropdownList from '../DropdownList';
 import Button from '../Button';
 
-const Forms = (props) => {
+const Forms = ({ createTeam, teams, whenRegistered }) => {
   const [name, setName] = useState('');
   const [role, setRole] = useState('');
   const [image, setImage] = useState('');
   const [team, setTeam] = useState('');
   const [specialty, setSpecialty] = useState('');
+  const [teamName, setTeamName] = useState('');
+  const [teamColor, setTeamColor] = useState('');
 
   const submitForm = (event) => {
     event.preventDefault();
-    props.whenRegistered({
+    whenRegistered({
       name,
       role,
       image,
@@ -66,12 +68,35 @@ const Forms = (props) => {
         <DropdownList 
           required={true} 
           label="Time" 
-          itens={props.teams}
+          itens={teams}
           value={team}
           whenChanged={value => setTeam(value)}
         />
         <Button>
           Criar Card
+        </Button>
+      </form>
+      <form onSubmit={(event) => {
+        event.preventDefault()
+        createTeam({ name: teamName, color: teamColor})
+       }}>
+        <h2>Preencha os dados para criar um novo time.</h2>
+        <TextField 
+          required
+          label="Nome" 
+          placeholder="Digite o seu nome do time" 
+          value={teamName} 
+          whenChanged={value => setTeamName(value)} 
+        />
+        <TextField 
+          required
+          label="Cor"
+          placeholder="Digite a cor do time" 
+          value={teamColor} 
+          whenChanged={value => setTeamColor(value)} 
+        />
+        <Button>
+          Criar um novo time
         </Button>
       </form>
     </section>

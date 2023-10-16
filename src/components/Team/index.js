@@ -8,7 +8,7 @@ const Team = ({ team, collaborators, whenDelete, changeColor }) => {
     collaborators.length > 0 ? <section className='team' style={{backgroundColor: hexToRgba(team.color, '0.6')}}>
       <input 
         className='input-color'
-        onChange={event => changeColor(event.target.value, event.name)} 
+        onChange={event => changeColor(event.target.value, team.id)} 
         value={team.color} 
         type='color'>
       </input>
