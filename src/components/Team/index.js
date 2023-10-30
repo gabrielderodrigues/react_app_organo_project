@@ -2,7 +2,7 @@ import './Team.css';
 import Collaborator from '../Collaborator';
 import hexToRgba from 'hex-to-rgba';
 
-const Team = ({ team, collaborators, whenDelete, changeColor }) => {
+const Team = ({ team, collaborators, whenDelete, changeColor, whenFavorite }) => {
   
   return (
     collaborators.length > 0 ? <section className='team' style={{backgroundColor: hexToRgba(team.color, '0.6')}}>
@@ -17,11 +17,13 @@ const Team = ({ team, collaborators, whenDelete, changeColor }) => {
         {collaborators.map((collaborator, index) => {
           return (
             <Collaborator
-            key={index} 
-            collaborator={collaborator}
-            backgroundColorStyle={team.color} 
-            fontColorStyle={team.color}
-            whenDelete={whenDelete}/>
+              key={index} 
+              collaborator={collaborator}
+              backgroundColorStyle={team.color} 
+              fontColorStyle={team.color}
+              whenDelete={whenDelete}
+              whenFavorite={whenFavorite}
+            />
           );
         })}
       </div>

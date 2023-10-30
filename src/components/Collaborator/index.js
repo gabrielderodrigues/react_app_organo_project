@@ -1,14 +1,24 @@
-import { AiOutlineDelete } from 'react-icons/ai';
+import { FaDeleteLeft } from 'react-icons/fa6';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import './Collaborator.css';
 
-const Collaborator = ({ collaborator, whenDelete, backgroundColorStyle, fontColorStyle }) => {
+const Collaborator = ({ collaborator, whenDelete, backgroundColorStyle, fontColorStyle, whenFavorite }) => {
   const imageInfo = `Imagem do ${collaborator.name}.`;
+
+  function changeFavorite() {
+    whenFavorite(collaborator.id)
+  };
+
+  const propsFavorite = {
+    size: 25,
+    onClick: changeFavorite
+  };
 
   return (
     <div className='collaborator'>
-      <AiOutlineDelete 
+      <FaDeleteLeft 
         size={29} 
-        color='red' 
+        color='#ae0303' 
         className="delete" 
         onClick={() => whenDelete(collaborator.id)} 
       />
@@ -17,7 +27,13 @@ const Collaborator = ({ collaborator, whenDelete, backgroundColorStyle, fontColo
       </div>
       <div className='card-footer'>
         <h4>{collaborator.name}</h4>
-        <p>{collaborator.role}</p>
+        <p>{collaborator.role}</p>        
+        <div className="favorite">
+          {collaborator.favorite 
+            ? <AiFillHeart {...propsFavorite} color='#ff0000'/> 
+            : <AiOutlineHeart {...propsFavorite} />
+          }
+        </div>
         <h5 style={{color: fontColorStyle}}>{collaborator.specialty}</h5>
       </div>
     </div>

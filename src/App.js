@@ -52,7 +52,7 @@ function App() {
   };
 
   function deleteCollaborator(id) {
-    setCollaborators(collaborators.filter(collaborator => collaborator.id != id));
+    setCollaborators(collaborators.filter(collaborator => collaborator.id !== id));
   }
 
   function changeTeamColor(color, id) {
@@ -68,6 +68,15 @@ function App() {
     setTeams([...teams, {...newTeam, id: uuidv4() }]);
   }
 
+  function changeFavoriteButton(id) {
+    setCollaborators(collaborators.map(collaborator => {
+      if (collaborator.id === id) {
+        collaborator.favorite = !collaborator.favorite;
+      }
+      return collaborator;
+    }));
+  }
+
   return (
     <div className="App">
       <Banner />
@@ -77,7 +86,9 @@ function App() {
         whenRegistered={collaborator => whenRegisteredNewCollaborator(collaborator)}/>
       <section className="teams">
         <h1>Minha organização</h1>
-        {teams.map((team, index) => <Team 
+        {teams.map((team, index) => 
+        <Team 
+          whenFavorite={changeFavoriteButton}
           key={index}
           team={team}
           collaborators={collaborators.filter(collaborator => collaborator.team === team.name)}
