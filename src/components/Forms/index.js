@@ -1,6 +1,6 @@
 import './Forms.css';
 import { useState } from 'react';
-import TextField from '../TextField';
+import Field from '../Field';
 import DropdownList from '../DropdownList';
 import Button from '../Button';
 
@@ -37,28 +37,28 @@ const Forms = ({ createTeam, teams, whenRegistered }) => {
     <section className="forms">
       <form onSubmit={submitForm}>
         <h2>Preencha os dados para criar o card do colaborador</h2>
-        <TextField 
+        <Field 
           required={true} 
           label="Nome" 
           placeholder="Digite o seu nome" 
           value={name} 
           whenChanged={value => setName(value)} 
         />
-        <TextField 
+        <Field 
           required={true} 
           label="Cargo"
           placeholder="Digite seu cargo" 
           value={role} 
           whenChanged={value => setRole(value)} 
         />
-        <TextField 
+        <Field 
           required={true} 
           label="Imagem"
           placeholder="Adicione uma imagem" 
           value={image} 
           whenChanged={value => setImage(value)} 
         />
-        <TextField 
+        <Field 
           required={true} 
           label="Especialidade"
           placeholder="Digite sua especialidade" 
@@ -80,16 +80,17 @@ const Forms = ({ createTeam, teams, whenRegistered }) => {
         event.preventDefault()
         createTeam({ name: teamName, color: teamColor})
        }}>
-        <h2>Preencha os dados para criar um novo time.</h2>
-        <TextField 
+        <h2>Preencha os dados para criar um novo time</h2>
+        <Field 
           required
           label="Nome" 
           placeholder="Digite o seu nome do time" 
           value={teamName} 
           whenChanged={value => setTeamName(value)} 
         />
-        <TextField 
+        <Field 
           required
+          type='color'
           label="Cor"
           placeholder="Digite a cor do time" 
           value={teamColor} 
